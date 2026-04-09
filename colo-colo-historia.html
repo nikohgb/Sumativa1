@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colo Colo — 100 Años de Gloria</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts: Barlow Condensed + Crimson Pro -->
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,600;0,700;0,900;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       VARIABLES GLOBALES — Identidad visual Colo Colo
+       ============================================================ */
+    :root {
+      --cc-negro:         #0a0a0a;
+      --cc-negro-medio:   #111111;
+      --cc-negro-suave:   #1a1a1a;
+      --cc-gris-oscuro:   #222222;
+      --cc-gris-medio:    #333333;
+      --cc-gris-texto:    #888888;
+      --cc-blanco:        #ffffff;
+      --cc-blanco-suave:  #f0ece4;
+      --cc-rojo:          #c0272d;
+      --cc-rojo-oscuro:   #8b1a1e;
+      --cc-rojo-brillante:#e63237;
+      --cc-oro:           #c9a84c;
+      --cc-oro-suave:     #e8c97a;
+
+      --fuente-titulo:    'Barlow Condensed', sans-serif;
+      --fuente-cuerpo:    'Crimson Pro', serif;
+
+      --radio-tarjeta:    12px;
+      --sombra-tarjeta:   0 4px 24px rgba(0,0,0,0.5);
+      --sombra-hover:     0 16px 48px rgba(192,39,45,0.25), 0 8px 24px rgba(0,0,0,0.6);
+      --transition:       all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ============================================================
+       RESET Y BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cc-negro);
+      color: var(--cc-blanco);
+      font-family: var(--fuente-cuerpo);
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Cursor personalizado */
+    body { cursor: crosshair; }
+    a, button { cursor: pointer; }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cc-negro); }
+    ::-webkit-scrollbar-thumb { background: var(--cc-rojo); border-radius: 3px; }
+
+    /* ============================================================
+       NAVBAR
+       ============================================================ */
+    .navbar-cc {
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(192,39,45,0.2);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-brand-cc {
+      font-family: var(--fuente-titulo);
+      font-weight: 900;
+      font-size: 1.5rem;
+      letter-spacing: 0.12em;
+      color: var(--cc-blanco) !important;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .navbar-brand-cc span {
+      color: var(--cc-rojo);
+    }
+
+    .navbar-stats {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .stat-item {
+      text-align: center;
+      font-family: var(--fuente-titulo);
+      line-height: 1.1;
+    }
+
+    .stat-numero {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--cc-rojo);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: var(--cc-negro);
+    }
+
+    /* Fondo con capas */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(192,39,45,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.05) 0%, transparent 60%),
+        linear-gradient(135deg, #0a0a0a 0%, #141414 50%, #0f0f0f 100%);
+      z-index: 0;
+    }
+
+    /* Líneas decorativas de fondo */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 79px,
+          rgba(255,255,255,0.02) 79px,
+          rgba(255,255,255,0.02) 80px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 79px,
+          rgba(255,255,255,0.02) 79px,
+          rgba(255,255,255,0.02) 80px
+        );
+      z-index: 0;
+    }
+
+    .hero-contenido {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-pretitulo {
+      font-family: var(--fuente-titulo);
+      font-size: 0.8rem;
+      letter-spacing: 0.4em;
+      color: var(--cc-rojo);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-pretitulo::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--cc-rojo);
+    }
+
+    .hero-titulo {
+      font-family: var(--fuente-titulo);
+      font-weight: 900;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--cc-blanco);
+      margin-bottom: 8px;
+    }
+
+    .hero-titulo .acento {
+      color: var(--cc-rojo);
+      display: block;
+      font-style: italic;
+    }
+
+    .hero-titulo .anio {
+      font-size: 0.38em;
+      color: var(--cc-gris-texto);
+      display: block;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      margin-top: 12px;
+    }
+
+    .hero-subtitulo {
+      font-family: var(--fuente-cuerpo);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--cc-blanco-suave);
+      opacity: 0.75;
+      max-width: 520px;
+      margin: 28px 0 40px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--cc-rojo);
+      color: var(--cc-blanco);
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 36px;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .hero-cta:hover {
+      background: var(--cc-rojo-brillante);
+      color: var(--cc-blanco);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(192,39,45,0.4);
+    }
+
+    /* Imagen decorativa héroe */
+    .hero-imagen-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-escudo-fondo {
+      font-size: clamp(12rem, 25vw, 22rem);
+      line-height: 1;
+      opacity: 0.04;
+      position: absolute;
+      font-family: var(--fuente-titulo);
+      font-weight: 900;
+      color: var(--cc-blanco);
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .hero-estadistica-grande {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .hero-num-grande {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(7rem, 18vw, 16rem);
+      font-weight: 900;
+      line-height: 0.85;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.12);
+      display: block;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-num-grande span {
+      color: var(--cc-rojo);
+      -webkit-text-stroke: 0;
+    }
+
+    .hero-detalle-linea {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .hero-linea-dec {
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cc-gris-texto));
+    }
+
+    .hero-linea-dec.derecha {
+      background: linear-gradient(90deg, var(--cc-gris-texto), transparent);
+    }
+
+    .hero-detalle-texto {
+      font-family: var(--fuente-titulo);
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+    }
+
+    /* Indicador de scroll */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .scroll-texto {
+      font-family: var(--fuente-titulo);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+    }
+
+    .scroll-linea {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(180deg, var(--cc-rojo), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ============================================================
+       SECCIÓN CONTEXTO / BANDA ESTADÍSTICAS
+       ============================================================ */
+    .banda-stats {
+      background: var(--cc-gris-oscuro);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 32px 0;
+      overflow: hidden;
+    }
+
+    .banda-item {
+      text-align: center;
+      padding: 8px 24px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .banda-item:last-child { border-right: none; }
+
+    .banda-numero {
+      font-family: var(--fuente-titulo);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--cc-blanco);
+      line-height: 1;
+      display: block;
+    }
+
+    .banda-numero .rojo { color: var(--cc-rojo); }
+
+    .banda-desc {
+      font-family: var(--fuente-titulo);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* ============================================================
+       SECCIÓN FILTROS
+       ============================================================ */
+    .seccion-filtros {
+      padding: 64px 0 32px;
+      background: var(--cc-negro-medio);
+    }
+
+    .seccion-titulo {
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: var(--cc-rojo);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .seccion-h2 {
+      font-family: var(--fuente-titulo);
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--cc-blanco);
+      margin-bottom: 40px;
+    }
+
+    .seccion-h2 em {
+      color: var(--cc-gris-texto);
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* Grupo de filtros */
+    .filtros-grupo {
+      margin-bottom: 20px;
+    }
+
+    .filtros-label {
+      font-family: var(--fuente-titulo);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .filtros-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-filtro {
+      font-family: var(--fuente-titulo);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;
+      color: var(--cc-gris-texto);
+      border-radius: 2px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-filtro:hover {
+      border-color: var(--cc-rojo);
+      color: var(--cc-blanco);
+      background: rgba(192,39,45,0.08);
+    }
+
+    .btn-filtro.activo {
+      background: var(--cc-rojo);
+      border-color: var(--cc-rojo);
+      color: var(--cc-blanco);
+    }
+
+    /* Barra de búsqueda */
+    .buscador-wrap {
+      position: relative;
+    }
+
+    .buscador-input {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--cc-blanco);
+      font-family: var(--fuente-cuerpo);
+      font-size: 1rem;
+      padding: 12px 48px 12px 20px;
+      border-radius: 2px;
+      width: 100%;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .buscador-input::placeholder { color: var(--cc-gris-texto); }
+
+    .buscador-input:focus {
+      border-color: var(--cc-rojo);
+      background: rgba(192,39,45,0.05);
+    }
+
+    .buscador-icono {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--cc-gris-texto);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* Contador de resultados */
+    .contador-resultados {
+      font-family: var(--fuente-titulo);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+      margin-top: 24px;
+    }
+
+    .contador-resultados strong {
+      color: var(--cc-rojo);
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       GRID DE LOGROS
+       ============================================================ */
+    .seccion-logros {
+      padding: 40px 0 96px;
+      background: var(--cc-negro);
+    }
+
+    /* Tarjeta de logro */
+    .tarjeta-logro {
+      background: var(--cc-negro-suave);
+      border-radius: var(--radio-tarjeta);
+      overflow: hidden;
+      box-shadow: var(--sombra-tarjeta);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .tarjeta-logro:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--sombra-hover);
+      border-color: rgba(192,39,45,0.3);
+    }
+
+    /* Imagen de la tarjeta */
+    .tarjeta-imagen-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+    }
+
+    .tarjeta-imagen {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: block;
+    }
+
+    .tarjeta-logro:hover .tarjeta-imagen {
+      transform: scale(1.07);
+    }
+
+    /* Overlay degradado sobre imagen */
+    .tarjeta-imagen-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(10,10,10,0.6) 70%,
+        rgba(10,10,10,0.95) 100%
+      );
+    }
+
+    /* Badge tipo de logro */
+    .tarjeta-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-family: var(--fuente-titulo);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+      backdrop-filter: blur(8px);
+    }
+
+    .badge-nacional     { background: rgba(192,39,45,0.85); color: #fff; }
+    .badge-internacional{ background: rgba(201,168,76,0.9);  color: #000; }
+    .badge-historico    { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+    .badge-fundacional  { background: rgba(10,10,10,0.8);    color: var(--cc-oro); border: 1px solid var(--cc-oro); }
+
+    /* Año en la imagen */
+    .tarjeta-anio-imagen {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      font-family: var(--fuente-titulo);
+      font-size: 2rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.15);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    /* Cuerpo de la tarjeta */
+    .tarjeta-cuerpo {
+      padding: 22px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .tarjeta-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tarjeta-anio {
+      font-family: var(--fuente-titulo);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--cc-rojo);
+    }
+
+    .tarjeta-sep {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--cc-gris-medio);
+    }
+
+    .tarjeta-contexto {
+      font-family: var(--fuente-titulo);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+    }
+
+    .tarjeta-nombre {
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      color: var(--cc-blanco);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .tarjeta-descripcion {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      font-weight: 300;
+    }
+
+    /* Justificación */
+    .tarjeta-justificacion {
+      background: rgba(192,39,45,0.06);
+      border-left: 2px solid var(--cc-rojo);
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      border-radius: 0 4px 4px 0;
+      flex: 1;
+    }
+
+    .tarjeta-justificacion p {
+      font-family: var(--fuente-cuerpo);
+      font-style: italic;
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+      margin: 0;
+      font-weight: 300;
+    }
+
+    /* Footer de la tarjeta */
+    .tarjeta-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn-ver-historia {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cc-rojo);
+      color: var(--cc-blanco) !important;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 2px;
+      transition: var(--transition);
+      border: none;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn-ver-historia:hover {
+      background: var(--cc-rojo-brillante);
+      color: var(--cc-blanco) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(192,39,45,0.4);
+    }
+
+    .btn-ver-historia i {
+      font-size: 0.9rem;
+      transition: transform 0.25s ease;
+    }
+
+    .btn-ver-historia:hover i {
+      transform: translateX(3px);
+    }
+
+    /* Tarjeta sin resultados */
+    .no-resultados {
+      text-align: center;
+      padding: 80px 24px;
+      display: none;
+    }
+
+    .no-resultados i {
+      font-size: 3rem;
+      color: var(--cc-gris-medio);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .no-resultados p {
+      font-family: var(--fuente-titulo);
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+    }
+
+    /* Animación de entrada */
+    .tarjeta-wrapper {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .tarjeta-wrapper.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tarjeta-wrapper.oculta {
+      display: none !important;
+    }
+
+    /* ============================================================
+       SECCIÓN LÍNEA DE TIEMPO (decorativa)
+       ============================================================ */
+    .seccion-legado {
+      background: var(--cc-negro-medio);
+      padding: 96px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .linea-tiempo-wrap {
+      position: relative;
+      padding: 32px 0;
+    }
+
+    .linea-tiempo-wrap::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--cc-rojo) 20%, var(--cc-rojo) 80%, transparent);
+      transform: translateX(-50%);
+    }
+
+    .lt-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .lt-item:nth-child(odd) { flex-direction: row; }
+    .lt-item:nth-child(even) { flex-direction: row-reverse; }
+
+    .lt-contenido {
+      width: calc(50% - 40px);
+      background: var(--cc-gris-oscuro);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 24px;
+      border-radius: 6px;
+      transition: var(--transition);
+    }
+
+    .lt-contenido:hover {
+      border-color: rgba(192,39,45,0.3);
+      transform: scale(1.02);
+    }
+
+    .lt-anio {
+      font-family: var(--fuente-titulo);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--cc-rojo);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .lt-titulo {
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--cc-blanco);
+      margin-bottom: 6px;
+    }
+
+    .lt-texto {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+    }
+
+    .lt-punto {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      background: var(--cc-rojo);
+      border-radius: 50%;
+      border: 3px solid var(--cc-negro-medio);
+      z-index: 1;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer-cc {
+      background: var(--cc-negro-medio);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 64px 0 32px;
+    }
+
+    .footer-logo {
+      font-family: var(--fuente-titulo);
+      font-weight: 900;
+      font-size: 2.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--cc-blanco);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span { color: var(--cc-rojo); }
+
+    .footer-tagline {
+      font-family: var(--fuente-cuerpo);
+      font-style: italic;
+      color: var(--cc-gris-texto);
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    .footer-sep {
+      width: 40px;
+      height: 2px;
+      background: var(--cc-rojo);
+      margin: 20px 0;
+    }
+
+    .footer-texto {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.85rem;
+      color: var(--cc-gris-texto);
+      line-height: 1.7;
+      max-width: 340px;
+    }
+
+    .footer-titulo-col {
+      font-family: var(--fuente-titulo);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--cc-rojo);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-lista {
+      list-style: none;
+    }
+
+    .footer-lista li {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 8px;
+      padding-left: 12px;
+      border-left: 1px solid rgba(192,39,45,0.3);
+      font-weight: 300;
+    }
+
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-family: var(--fuente-titulo);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--cc-gris-texto);
+      text-transform: uppercase;
+    }
+
+    .footer-disclaimer {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.2);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       UTILIDADES GENERALES
+       ============================================================ */
+    .seccion-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cc-rojo), transparent);
+      margin-bottom: 32px;
+    }
+
+    /* Animaciones de entrada para secciones */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 991px) {
+      .linea-tiempo-wrap::before { left: 20px; }
+      .lt-item,
+      .lt-item:nth-child(even) { flex-direction: row; }
+      .lt-contenido { width: calc(100% - 56px); margin-left: auto; }
+      .lt-punto { left: 20px; }
+      .navbar-stats { display: none; }
+    }
+
+    @media (max-width: 767px) {
+      .hero-titulo { font-size: clamp(3.5rem, 15vw, 6rem); }
+      .banda-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .banda-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+       ============================================================ -->
+  <nav class="navbar-cc">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <a href="#" class="navbar-brand-cc">Colo<span>—</span>Colo</a>
+        <div class="navbar-stats d-none d-lg-flex">
+          <div class="stat-item">
+            <span class="stat-numero">34</span>
+            <span class="stat-label">Títulos Nacionales</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-numero">1</span>
+            <span class="stat-label">Copa Libertadores</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-numero">100</span>
+            <span class="stat-label">Años de Historia</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-numero">1925</span>
+            <span class="stat-label">Fundación</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Texto principal -->
+        <div class="col-12 col-lg-6 hero-contenido">
+          <p class="hero-pretitulo">Club Social y Deportivo</p>
+          <h1 class="hero-titulo">
+            Colo
+            <span class="acento">Colo</span>
+            <span class="anio">1925 — 2025</span>
+          </h1>
+          <p class="hero-subtitulo">
+            Un siglo de grandeza, pasión y gloria. Los momentos que forjaron la leyenda del
+            equipo más grande de Chile.
+          </p>
+          <a href="#logros" class="hero-cta">
+            <i class="bi bi-trophy-fill"></i>
+            Explorar Historia
+          </a>
+        </div>
+
+        <!-- Número decorativo -->
+        <div class="col-12 col-lg-6 hero-imagen-wrap d-none d-md-flex">
+          <span class="hero-escudo-fondo">CACIQUE</span>
+          <div class="hero-estadistica-grande">
+            <span class="hero-num-grande"><span>34</span></span>
+            <div class="hero-detalle-linea">
+              <span class="hero-linea-dec"></span>
+              <span class="hero-detalle-texto">Campeonatos del fútbol chileno</span>
+              <span class="hero-linea-dec derecha"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Indicador de scroll -->
+    <div class="scroll-indicator">
+      <span class="scroll-texto">Explorar</span>
+      <div class="scroll-linea"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BANDA DE ESTADÍSTICAS
+       ============================================================ -->
+  <div class="banda-stats">
+    <div class="container">
+      <div class="row text-center g-0">
+        <div class="col-6 col-md-3">
+          <div class="banda-item">
+            <span class="banda-numero"><span class="rojo">33</span></span>
+            <span class="banda-desc">Campeonatos Primera División</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="banda-item">
+            <span class="banda-numero"><span class="rojo">1</span></span>
+            <span class="banda-desc">Copa Libertadores</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="banda-item">
+            <span class="banda-numero"><span class="rojo">3</span></span>
+            <span class="banda-desc">Copas Chile</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="banda-item">
+            <span class="banda-numero"><span class="rojo">100</span></span>
+            <span class="banda-desc">Años de Historia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCIÓN FILTROS
+       ============================================================ -->
+  <section class="seccion-filtros" id="logros">
+    <div class="container">
+      <div class="fade-in-up">
+        <p class="seccion-titulo">El Archivo Histórico</p>
+        <h2 class="seccion-h2">Logros <em>& Hitos</em></h2>
+        <div class="seccion-divider"></div>
+      </div>
+
+      <!-- Filtro por décadas -->
+      <div class="filtros-grupo fade-in-up">
+        <span class="filtros-label">Filtrar por período</span>
+        <div class="filtros-wrap">
+          <button class="btn-filtro activo" data-filtro-decada="todos">Todos</button>
+          <button class="btn-filtro" data-filtro-decada="1925-1950">1925 — 1950</button>
+          <button class="btn-filtro" data-filtro-decada="1951-1999">1951 — 1999</button>
+          <button class="btn-filtro" data-filtro-decada="2000-2025">2000 — 2025</button>
+        </div>
+      </div>
+
+      <!-- Filtro por tipo -->
+      <div class="filtros-grupo fade-in-up">
+        <span class="filtros-label">Filtrar por tipo de logro</span>
+        <div class="filtros-wrap">
+          <button class="btn-filtro activo" data-filtro-tipo="todos">Todos</button>
+          <button class="btn-filtro" data-filtro-tipo="nacional">Nacional</button>
+          <button class="btn-filtro" data-filtro-tipo="internacional">Internacional</button>
+          <button class="btn-filtro" data-filtro-tipo="historico">Histórico</button>
+          <button class="btn-filtro" data-filtro-tipo="fundacional">Fundacional</button>
+        </div>
+      </div>
+
+      <!-- Buscador -->
+      <div class="row fade-in-up">
+        <div class="col-12 col-md-6">
+          <div class="buscador-wrap">
+            <input
+              type="text"
+              class="buscador-input"
+              id="buscadorInput"
+              placeholder="Buscar logro, año o torneo..."
+            />
+            <i class="bi bi-search buscador-icono"></i>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex align-items-center">
+          <p class="contador-resultados mb-0">Mostrando <strong id="contadorNum">17</strong> logros históricos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GRID DE LOGROS
+       ============================================================ -->
+  <section class="seccion-logros">
+    <div class="container">
+      <div class="row g-4" id="gridLogros">
+
+        <!-- ======================================================
+             TARJETA 1: Fundación del club
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1925-1950"
+             data-tipo="fundacional"
+             data-texto="fundación colo-colo 1925 david arellano">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://img.asmedia.epimg.net/resizer/v2/2IMDAIHIBZOM7GRUEVHVH5DQ4E.jpg?auth=75b30e1b86a46e4f9ec97a8c3641ae93a72e21587692ffd68043165c6e127819&width=1472&height=828&smart=true"
+                alt="Fundación Colo-Colo 1925"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=COLO+COLO'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-fundacional">Fundacional</span>
+              <span class="tarjeta-anio-imagen">1925</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1925</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Santiago, Chile</span>
+              </div>
+              <h3 class="tarjeta-nombre">Fundación del Club por David Arellano</h3>
+              <p class="tarjeta-descripcion">
+                El 19 de abril de 1925, un grupo de jóvenes liderados por David Arellano fundaron el Club Social y Deportivo Colo-Colo, dando vida al equipo más popular y exitoso del fútbol chileno.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>El origen de la institución más grande del fútbol chileno, nombrada en honor al legendario cacique mapuche Colocolo, hito que marcó para siempre el deporte nacional.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+fundacion+1925+historia" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 2: Gira Europa 1927
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1925-1950"
+             data-tipo="historico"
+             data-texto="gira europa 1927 david arellano fallecimiento">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.colocolo.cl/assets/imagen/primeros-titulos.png"
+                alt="David Arellano, gira a Europa 1927"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=GIRA+EUROPA'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-historico">Histórico</span>
+              <span class="tarjeta-anio-imagen">1927</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1927</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">España — Europa</span>
+              </div>
+              <h3 class="tarjeta-nombre">Gira a España y Muerte de David Arellano</h3>
+              <p class="tarjeta-descripcion">
+                En plena gira por Europa, el capitán y fundador David Arellano falleció en Valladolid, España, el 2 de mayo de 1927. El club completó la gira en su honor, ganándose el respeto de Europa.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>Primer club sudamericano en realizar una gira por Europa. El sacrificio de Arellano consolidó la identidad del "Cacique" y su legado se convirtió en la esencia del club.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=david+arellano+colo+colo+historia" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 3: Primer Campeonato 1937
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1925-1950"
+             data-tipo="nacional"
+             data-texto="primer campeonato nacional 1937 primera division">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.sentimientopopular.cl/wp-content/uploads/2020/09/estadio-monumental.jpg"
+                alt="Colo-Colo campeón 1937"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=CAMPEON+1937'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-nacional">Nacional</span>
+              <span class="tarjeta-anio-imagen">1937</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1937</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Primera División</span>
+              </div>
+              <h3 class="tarjeta-nombre">Primer Campeonato Nacional Oficial</h3>
+              <p class="tarjeta-descripcion">
+                Colo-Colo conquistó su primer título en la Primera División oficial del fútbol chileno, inaugurando una era de dominio que se extendería por todo el siglo XX.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>El inicio de la era de oro. Con este título comenzó la racha histórica que convierte a Colo-Colo en el club con más campeonatos de Chile, una supremacía sin precedentes.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+campeon+1937+primera+division" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 4: Inauguración Estadio Monumental 1938
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1925-1950"
+             data-tipo="historico"
+             data-texto="estadio monumental inauguración 1938">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://historiadecolocolo.com/images/1962.jpg"
+                alt="Estadio Monumental de Colo-Colo"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=ESTADIO+MONUMENTAL'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-historico">Histórico</span>
+              <span class="tarjeta-anio-imagen">1938</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1938</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Macul, Santiago</span>
+              </div>
+              <h3 class="tarjeta-nombre">Inauguración del Estadio Monumental</h3>
+              <p class="tarjeta-descripcion">
+                El Estadio Monumental David Arellano abrió sus puertas en 1938, convirtiéndose con los años en el recinto con mayor capacidad de Chile y uno de los más grandes de Sudamérica.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>La "Casa Blanca" es el templo del fútbol chileno. Con capacidad para 47.000 espectadores, es símbolo del poder e influencia del Cacique en la cultura nacional.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=estadio+monumental+colo+colo+historia" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 5: Época dorada años 60 — Carlos Campos
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1951-1999"
+             data-tipo="nacional"
+             data-texto="época dorada 1960 dominio campeonatos">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.sentimientopopular.cl/wp-content/uploads/2020/06/IMG_20200606_201759_990.jpg"
+                alt="Colo-Colo años 60"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=AÑOS+60'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-nacional">Nacional</span>
+              <span class="tarjeta-anio-imagen">1963</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1963</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Era Dominio Nacional</span>
+              </div>
+              <h3 class="tarjeta-nombre">Dominio en los Años 60 — La Generación Gloriosa</h3>
+              <p class="tarjeta-descripcion">
+                Durante la década del 60, Colo-Colo consolidó su hegemonía en el fútbol chileno con jugadores de talla mundial como Leonel Sánchez, figura del Mundial Chile 1962.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>La primera gran generación post-mundialista solidificó al club como potencia regional, sentando las bases del dominio histórico que define al Cacique hasta hoy.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+historia+decada+1960" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 6: Final Copa Libertadores 1973
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1951-1999"
+             data-tipo="internacional"
+             data-texto="copa libertadores 1973 finalista independiente argentina">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://ds-images.bolavip.com/news/image?src=https%3A%2F%2Fimages.dalealbo.cl%2Fwebp%2Ffull%2FDLA_20250605_DLA_258446_colo-colo-copa-libertadores-scaled-e1749140492998.webp&width=490&height=275"
+                alt="Copa Libertadores 1973"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=LIBERTADORES+1973'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-internacional">Internacional</span>
+              <span class="tarjeta-anio-imagen">1973</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1973</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Copa Libertadores</span>
+              </div>
+              <h3 class="tarjeta-nombre">Finalista Copa Libertadores 1973</h3>
+              <p class="tarjeta-descripcion">
+                Colo-Colo alcanzó la final de la Copa Libertadores de América 1973, cayendo ante Independiente de Argentina. Fue la primera final de un equipo chileno en ese torneo.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>Un hito histórico para el fútbol chileno: ningún club del país había llegado tan lejos en la copa más importante de Sudamérica. Abrió el camino hacia el título de 1991.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+copa+libertadores+1973+final" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 7: Copa Libertadores 1991 — EL TÍTULO
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1951-1999"
+             data-tipo="internacional"
+             data-texto="copa libertadores 1991 campeón colo-colo cacique">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.radiosport.cl/web/wp-content/uploads/2018/04/COLO-COLO-RECOPA-1992-768x432.jpg"
+                alt="Copa Libertadores 1991 — Colo-Colo Campeón"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=LIBERTADORES+1991'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-internacional">Internacional</span>
+              <span class="tarjeta-anio-imagen">1991</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1991</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Copa Libertadores — Final</span>
+              </div>
+              <h3 class="tarjeta-nombre">🏆 Campeón Copa Libertadores 1991</h3>
+              <p class="tarjeta-descripcion">
+                Bajo la dirección técnica de Mirko Jozic, Colo-Colo venció a Olimpia de Paraguay en la final y se coronó campeón de América. Goles de Vergara y Almirón sellaron la gloria eterna.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>El mayor logro en la historia del club y del fútbol chileno. El único equipo de Chile en conquistar la Copa Libertadores, un hito que marcó una generación completa de un país.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+campeon+libertadores+1991+final" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 8: Recopa Sudamericana 1992
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1951-1999"
+             data-tipo="internacional"
+             data-texto="recopa sudamericana 1992 nacional uruguay">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://ds-images.bolavip.com/news/image/1200/740/?src=https://images.dalealbo.cl/webp/full/DLA_20250626_DLA_262942_TQ445LHGYJOQPDY4ISA6P7BEYU-e1750978442271.webp"
+                alt="Recopa Sudamericana 1992"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=RECOPA+1992'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-internacional">Internacional</span>
+              <span class="tarjeta-anio-imagen">1992</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1992</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Recopa Sudamericana</span>
+              </div>
+              <h3 class="tarjeta-nombre">Campeón Recopa Sudamericana 1992</h3>
+              <p class="tarjeta-descripcion">
+                Aprovechando su condición de campeón de América, Colo-Colo disputó y ganó la Recopa Sudamericana de 1992 ante Club Nacional de Uruguay, consolidando su reinado continental.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>Segundo título internacional consecutivo que reafirmó al Cacique como el mejor equipo de Sudamérica en ese período, logrando un doblete histórico para Chile.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+recopa+sudamericana+1992" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 9: Copa Interamericana 1992
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1951-1999"
+             data-tipo="internacional"
+             data-texto="copa interamericana 1992 CONCACAF">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.latercera.com/resizer/v2/4BQ6G5R2YBDN3LCUHDUI4DX7PQ.PNG?auth=f4ef2b6e62cf44ce3096b0d57eb5cdfca13de1ceca7783958669a23289b3c1ce&height=474&width=768&smart=true"
+                alt="Copa Interamericana 1992"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=COPA+INTERAMERICANA'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-internacional">Internacional</span>
+              <span class="tarjeta-anio-imagen">1992</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1992</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Copa Interamericana CONCACAF</span>
+              </div>
+              <h3 class="tarjeta-nombre">Campeón Copa Interamericana 1992</h3>
+              <p class="tarjeta-descripcion">
+                Colo-Colo venció al CONCACAF Club USA y conquistó la Copa Interamericana, enfrentando a los mejores equipos de Norteamérica y Centroamérica. Tercer título internacional en menos de dos años.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>Colo-Colo logró un triplete internacional histórico (Libertadores, Recopa, Copa Interamericana), confirmándose como el club más ganador de Sudamérica en ese período.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+copa+interamericana+1992" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 10: 10 Campeonatos en fila
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="1951-1999"
+             data-tipo="nacional"
+             data-texto="racha 10 campeonatos seguidos apertura clausura">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://ds-images.bolavip.com/news/image/714/535/?src=https://images.redgol.cl/webp/full/RDG_20241213_RDG_930638_colo-colo-2002-e1734119790879.webp"
+                alt="Racha histórica de campeonatos"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=10+TITULOS'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-nacional">Nacional</span>
+              <span class="tarjeta-anio-imagen">1992</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1992–1997</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Torneo Apertura y Clausura</span>
+              </div>
+              <h3 class="tarjeta-nombre">Racha de 10 Títulos Consecutivos (1992–1997)</h3>
+              <p class="tarjeta-descripcion">
+                Entre 1992 y 1997, Colo-Colo dominó el fútbol chileno de manera absoluta, ganando diez torneos de manera consecutiva en el formato de Apertura y Clausura, un récord imbatible.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>La racha más dominante en la historia del fútbol chileno. Ningún club en Chile, ni en la mayoría de Sudamérica, ha mantenido una hegemonía tan absoluta y prolongada.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+racha+campeonatos+1990+dominancia" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 12: Salvación del descenso 2002
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="2000-2025"
+             data-tipo="historico"
+             data-texto="descenso crisis 2002 salvación promedio">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://csdcolocolo.cl/wp-content/uploads/2023/06/768.jpg"
+                alt="Crisis Colo-Colo 2002"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=CRISIS+2002'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-historico">Histórico</span>
+              <span class="tarjeta-anio-imagen">2002</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">2002</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Crisis institucional</span>
+              </div>
+              <h3 class="tarjeta-nombre">La Gran Salvación — La Crisis de 2002</h3>
+              <p class="tarjeta-descripcion">
+                Colo-Colo vivió su peor momento histórico al quedar en zona de descenso por primera vez. La movilización masiva de hinchas, jugadores y la dirigencia logró salvar al club en el último momento.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>Demostró que Colo-Colo trasciende el deporte. La unión de todo Chile para salvar al Cacique fue uno de los eventos más emotivos en la historia del fútbol nacional.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+descenso+2002+salvacion" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 13: Regreso a la cima 2006
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="2000-2025"
+             data-tipo="nacional"
+             data-texto="colo colo campeón 2006 apertura regreso">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.espn.cl/2003/photos2014/1223/colocolo_576.jpg"
+                alt="Colo-Colo campeón 2006"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=CAMPEON+2006'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-nacional">Nacional</span>
+              <span class="tarjeta-anio-imagen">2006</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">2006</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Torneo de Apertura</span>
+              </div>
+              <h3 class="tarjeta-nombre">Regreso al Trono — Campeón 2006</h3>
+              <p class="tarjeta-descripcion">
+                Tras una etapa de crisis institucional y deportiva, Colo-Colo retomó el liderazgo del fútbol chileno ganando el Torneo de Apertura 2006, marcando su resurgimiento como potencia nacional.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>El retorno del Cacique al reinado nacional tras años de penurias demostró la resiliencia del club y la capacidad de renacer más fuerte. Un título con carga emocional enorme.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+campeon+2006+apertura" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 14: Era Paredes 2007-2015
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="2000-2025"
+             data-tipo="historico"
+             data-texto="esteban paredes goleador histórico record">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.futbolchileno.com/wp-content/uploads/2016/12/colo-colo-campeon-400x232.jpg"
+                alt="Esteban Paredes, goleador histórico"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=PAREDES'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-historico">Histórico</span>
+              <span class="tarjeta-anio-imagen">2015</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">2007–2020</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Goleador Histórico</span>
+              </div>
+              <h3 class="tarjeta-nombre">Esteban Paredes — Goleador Histórico del Fútbol Chileno</h3>
+              <p class="tarjeta-descripcion">
+                Esteban Paredes se convirtió en el goleador histórico tanto de Colo-Colo como del fútbol chileno, superando todos los récords con más de 220 goles y ganando múltiples campeonatos.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>El máximo anotador en la historia del fútbol chileno es colocolino. Paredes encarna la mística del Cacique: talento, permanencia y entrega total al club de sus amores.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=esteban+paredes+goles+historicos+colo+colo" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 15: Tri-campeonato 2014-2015
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+            
+             data-decada="2000-2025"
+             data-tipo="nacional"
+             data-texto="tri campeonato 2014 2015 tres títulos consecutivos">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://www.24horas.cl/24horas/site/artic/20250404/imag/foto_0000000320250404121243/centenario_cc.jpg"
+                alt="Tri-campeonato Colo-Colo 2015"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=TRI+2015'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-nacional">Nacional</span>
+              <span class="tarjeta-anio-imagen">2015</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">2014–2015</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Tres campeonatos seguidos</span>
+              </div>
+              <h3 class="tarjeta-nombre">Tri-Campeonato Nacional 2014–2015</h3>
+              <p class="tarjeta-descripcion">
+                Bajo la dirección de Pablo Guede, Colo-Colo ganó tres torneos nacionales consecutivos (Clausura 2014, Apertura 2015 y Clausura 2015), recordando la era dorada de los 90.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>El tri-campeonato más reciente del club en la era moderna, con un equipo que demostró consistencia y superioridad clara sobre la competencia durante dos temporadas completas.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+tricampeon+2015+pablo+guede" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 16: Copa Chile 2016
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="2000-2025"
+             data-tipo="nacional"
+             data-texto="copa chile 2016 campeón">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://ds-images.bolavip.com/news/image/1200/740/?src=https://images.dalealbo.cl/webp/full/RDG_20250626_RDG_262942_TQ445LHGYJOQPDY4ISA6P7BEYU-e1750978442271.webp"
+                alt="Copa Chile 2016"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=COPA+CHILE+2016'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-nacional">Nacional</span>
+              <span class="tarjeta-anio-imagen">2016</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">2016</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Copa Chile</span>
+              </div>
+              <h3 class="tarjeta-nombre">Campeón Copa Chile 2016</h3>
+              <p class="tarjeta-descripcion">
+                Colo-Colo se adjudicó la Copa Chile 2016, consolidando su hegemonía en el fútbol chileno y sumando un nuevo título a su palmarés histórico, el mayor del país.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>La Copa Chile es el segundo trofeo más importante del fútbol nacional. Colo-Colo demostró su capacidad de competir en múltiples frentes con la misma intensidad.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+copa+chile+2016" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+             TARJETA 17: 100 Años - Centenario 2025
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="2000-2025"
+             data-tipo="fundacional"
+             data-texto="centenario colo colo 2025 100 años aniversario">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Escudo_del_Club_Social_y_Deportivo_Colo-Colo.svg/480px-Escudo_del_Club_Social_y_Deportivo_Colo-Colo.svg.png"
+                alt="Centenario Colo-Colo 2025"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=CENTENARIO+2025'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-fundacional">Centenario</span>
+              <span class="tarjeta-anio-imagen">2025</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">2025</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Aniversario 100 Años</span>
+              </div>
+              <h3 class="tarjeta-nombre">🎖️ Centenario — 100 Años de Gloria Eterna</h3>
+              <p class="tarjeta-descripcion">
+                El 19 de abril de 2025, Colo-Colo celebró su centenario con festejos masivos en todo Chile. Un siglo de historia, logros, gloria y la identidad más querida del deporte chileno.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>Ningún club de Chile ha celebrado 100 años con el palmarés, la hinchada y el impacto cultural de Colo-Colo. El centenario es el cierre glorioso de un siglo sin igual.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+centenario+2025+100+años" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================
+        TARJETA 18: 34 Campeonatos — Récord absoluto
+             ====================================================== -->
+        <div class="col-12 col-md-6 col-lg-3 tarjeta-wrapper"
+             data-decada="2000-2025"
+             data-tipo="nacional"
+             data-texto="34 campeonatos record más títulos chile historia">
+          <div class="tarjeta-logro">
+            <div class="tarjeta-imagen-wrap">
+              <img
+                class="tarjeta-imagen"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Estadio_Monumental_David_Arellano%2C_Santiago_de_Chile.jpg/640px-Estadio_Monumental_David_Arellano%2C_Santiago_de_Chile.jpg"
+                alt="Colo-Colo 34 Campeonatos"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/640x400/1a1a1a/c0272d?text=34+TITULOS'"
+              />
+              <div class="tarjeta-imagen-overlay"></div>
+              <span class="tarjeta-badge badge-nacional">Récord Histórico</span>
+              <span class="tarjeta-anio-imagen">34</span>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="tarjeta-meta">
+                <span class="tarjeta-anio">1937–2025</span>
+                <span class="tarjeta-sep"></span>
+                <span class="tarjeta-contexto">Primera División Chile</span>
+              </div>
+              <h3 class="tarjeta-nombre">34 Campeonatos — El Club más Ganador de Chile</h3>
+              <p class="tarjeta-descripcion">
+                Con 34 títulos de Primera División, Colo-Colo es por lejos el club más ganador en la historia del fútbol chileno, superando a sus rivales por una distancia histórica insuperable.
+              </p>
+              <div class="tarjeta-justificacion">
+                <p>El número habla por sí solo: 34 campeonatos en 88 años de historia oficial del fútbol chileno. Una supremacía que define toda la identidad y el orgullo del Cacique.</p>
+              </div>
+              <div class="tarjeta-footer">
+                <a href="https://www.youtube.com/results?search_query=colo+colo+34+campeonatos+historia+fútbol+chileno" target="_blank" rel="noopener" class="btn-ver-historia">
+                  Ver Historia <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row -->
+
+      <!-- Mensaje sin resultados -->
+      <div class="no-resultados" id="noResultados">
+        <i class="bi bi-search"></i>
+        <p>No se encontraron logros con ese criterio</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN LÍNEA DE TIEMPO
+       ============================================================ -->
+  <section class="seccion-legado">
+    <div class="container">
+      <div class="row mb-5 fade-in-up">
+        <div class="col-12">
+          <p class="seccion-titulo">Momentos que definen una era</p>
+          <h2 class="seccion-h2">Línea del <em>Tiempo</em></h2>
+          <div class="seccion-divider"></div>
+        </div>
+      </div>
+
+      <div class="linea-tiempo-wrap">
+
+        <div class="lt-item fade-in-up">
+          <div class="lt-contenido">
+            <div class="lt-anio">1925</div>
+            <div class="lt-titulo">Fundación por David Arellano</div>
+            <p class="lt-texto">Nace el club que cambiaría para siempre el fútbol chileno y sudamericano.</p>
+          </div>
+          <div class="lt-punto"></div>
+        </div>
+
+        <div class="lt-item fade-in-up">
+          <div class="lt-contenido">
+            <div class="lt-anio">1927</div>
+            <div class="lt-titulo">Primera gira a Europa</div>
+            <p class="lt-texto">Primer club sudamericano en disputar partidos en Europa. El sacrificio de Arellano forjó la leyenda.</p>
+          </div>
+          <div class="lt-punto"></div>
+        </div>
+
+        <div class="lt-item fade-in-up">
+          <div class="lt-contenido">
+            <div class="lt-anio">1937</div>
+            <div class="lt-titulo">Primer campeonato nacional</div>
+            <p class="lt-texto">Inicia la era de dominio absoluto en el fútbol chileno que se extendería por décadas.</p>
+          </div>
+          <div class="lt-punto"></div>
+        </div>
+
+        <div class="lt-item fade-in-up">
+          <div class="lt-contenido">
+            <div class="lt-anio">1991</div>
+            <div class="lt-titulo">Campeón de América</div>
+            <p class="lt-texto">La Copa Libertadores llega a Chile por primera y única vez, consagrando al Cacique como el mejor equipo del continente.</p>
+          </div>
+          <div class="lt-punto"></div>
+        </div>
+
+        <div class="lt-item fade-in-up">
+          <div class="lt-contenido">
+            <div class="lt-anio">2025</div>
+            <div class="lt-titulo">Centenario — 100 Años de Gloria</div>
+            <p class="lt-texto">Un siglo de historia, 33 campeonatos nacionales y el orgullo de ser el club más grande de Chile.</p>
+          </div>
+          <div class="lt-punto"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer-cc">
+    <div class="container">
+      <div class="row g-5">
+
+        <div class="col-12 col-md-4">
+          <div class="footer-logo">Colo<span>—</span>Colo</div>
+          <p class="footer-tagline">"El Eterno Campeón"</p>
+          <div class="footer-sep"></div>
+          <p class="footer-texto">
+            Archivo digital de los logros históricos del Club Social y Deportivo Colo-Colo,
+            el equipo más grande de Chile. Cien años de gloria, historia y pasión.
+          </p>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <p class="footer-titulo-col">Períodos</p>
+          <ul class="footer-lista">
+            <li>1925 — 1950</li>
+            <li>1950 — 1975</li>
+            <li>1975 — 2000</li>
+            <li>2000 — 2025</li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <p class="footer-titulo-col">Tipos de logro</p>
+          <ul class="footer-lista">
+            <li>Títulos Nacionales</li>
+            <li>Copas Internacionales</li>
+            <li>Hitos Históricos</li>
+            <li>Fundacionales</li>
+          </ul>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <p class="footer-titulo-col">Palmarés Destacado</p>
+          <ul class="footer-lista">
+            <li>34× Campeonato Primera División</li>
+            <li>14× Copa Chile</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 — Colo Colo Historia · Archivo Digital Independiente</p>
+        <p class="footer-disclaimer">Este archivo es un tributo a la historia del club. Todos los derechos de marcas e imágenes pertenecen a sus respectivos propietarios.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       SISTEMA DE FILTRADO DINÁMICO
+       ============================================================ */
+
+    // Estado del filtro actual
+    let filtroDecada = 'todos';
+    let filtroTipo   = 'todos';
+    let textoBusqueda = '';
+
+    // Referencia a todas las tarjetas
+    const tarjetas = document.querySelectorAll('.tarjeta-wrapper');
+    const contadorEl = document.getElementById('contadorNum');
+    const noResultadosEl = document.getElementById('noResultados');
+
+    /**
+     * Aplica todos los filtros activos y actualiza la vista
+     */
+    function aplicarFiltros() {
+      let visibles = 0;
+
+      tarjetas.forEach(tarjeta => {
+        const decada = tarjeta.dataset.decada;
+        const tipo   = tarjeta.dataset.tipo;
+        const texto  = tarjeta.dataset.texto.toLowerCase();
+
+        const pasaDecada  = filtroDecada  === 'todos' || decada === filtroDecada;
+        const pasaTipo    = filtroTipo    === 'todos' || tipo   === filtroTipo;
+        const pasaBusqueda = textoBusqueda === '' || texto.includes(textoBusqueda);
+
+        if (pasaDecada && pasaTipo && pasaBusqueda) {
+          tarjeta.classList.remove('oculta');
+          visibles++;
+        } else {
+          tarjeta.classList.add('oculta');
+        }
+      });
+
+      // Actualizar contador
+      contadorEl.textContent = visibles;
+
+      // Mostrar / ocultar mensaje sin resultados
+      noResultadosEl.style.display = visibles === 0 ? 'block' : 'none';
+    }
+
+    /* ------- Filtros por DÉCADA ------- */
+    document.querySelectorAll('[data-filtro-decada]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remover activo del grupo
+        document.querySelectorAll('[data-filtro-decada]').forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
+        filtroDecada = btn.dataset.filtroDecada;
+        aplicarFiltros();
+      });
+    });
+
+    /* ------- Filtros por TIPO ------- */
+    document.querySelectorAll('[data-filtro-tipo]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-filtro-tipo]').forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
+        filtroTipo = btn.dataset.filtroTipo;
+        aplicarFiltros();
+      });
+    });
+
+    /* ------- Búsqueda por texto ------- */
+    document.getElementById('buscadorInput').addEventListener('input', function() {
+      textoBusqueda = this.value.toLowerCase().trim();
+      aplicarFiltros();
+    });
+
+    /* ============================================================
+       ANIMACIONES AL HACER SCROLL (Intersection Observer)
+       ============================================================ */
+    const observadorOpciones = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    // Observer para tarjetas
+    const observadorTarjetas = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada, index) => {
+        if (entrada.isIntersecting) {
+          // Retraso escalonado para efecto cascada
+          setTimeout(() => {
+            entrada.target.classList.add('visible');
+          }, index * 60);
+          observadorTarjetas.unobserve(entrada.target);
+        }
+      });
+    }, observadorOpciones);
+
+    tarjetas.forEach(tarjeta => {
+      observadorTarjetas.observe(tarjeta);
+    });
+
+    // Observer para elementos fade-in-up
+    const observadorFade = new IntersectionObserver((entradas) => {
+      entradas.forEach(entrada => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add('visible');
+          observadorFade.unobserve(entrada.target);
+        }
+      });
+    }, { ...observadorOpciones, threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in-up').forEach(el => {
+      observadorFade.observe(el);
+    });
+
+    /* ============================================================
+       ANIMACIÓN NUMÉRICA DEL HERO (contador animado)
+       ============================================================ */
+    function animarContador(elemento, inicio, fin, duracion) {
+      let inicioTiempo = null;
+      const paso = (tiempoActual) => {
+        if (!inicioTiempo) inicioTiempo = tiempoActual;
+        const progreso = Math.min((tiempoActual - inicioTiempo) / duracion, 1);
+        const valorActual = Math.floor(progreso * (fin - inicio) + inicio);
+        elemento.textContent = valorActual;
+        if (progreso < 1) requestAnimationFrame(paso);
+      };
+      requestAnimationFrame(paso);
+    }
+
+    // Activar animación cuando el hero sea visible
+    const observadorHero = new IntersectionObserver((entradas) => {
+      entradas.forEach(entrada => {
+        if (entrada.isIntersecting) {
+          const nums = document.querySelectorAll('.banda-numero .rojo');
+          nums.forEach(num => {
+            const valorFinal = parseInt(num.textContent);
+            animarContador(num, 0, valorFinal, 1800);
+          });
+          observadorHero.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const bandaEl = document.querySelector('.banda-stats');
+    if (bandaEl) observadorHero.observe(bandaEl);
+
+    /* ============================================================
+       EFECTO PARALLAX SUTIL EN EL HERO
+       ============================================================ */
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroContenido = document.querySelector('.hero-contenido');
+      if (heroContenido && scrollY < window.innerHeight) {
+        heroContenido.style.transform = `translateY(${scrollY * 0.15}px)`;
+      }
+    }, { passive: true });
+
+  </script>
+</body>
+</html>
